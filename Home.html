@@ -13,33 +13,39 @@
     <script src="Scripts/js/customLib.js"></script>
 </head>
 <body>
-    
-    <div id="chart"></div>
+    <div class="container">
+        <div class="jumbotron">
 
-    
-    <p></p>
-    <input type="button" name="getData" value="FetchData" class="btn fetchData" />
-    
+            <h2 class="h2">Visualising data for My Store</h2>
+            <p>Please click on the Fetch Data button to populate the heatmap</p>
+        </div>
+        <div id="chart"></div>
+
+
+        <p class="message"></p>
+        <input type="button" name="getData" value="FetchData" class="btn fetchData" />
+        
+    </div>
     <script type="text/javascript">
         $(document).ready(function () {
            
             $('.fetchData').on('click', function (event) {
                 $('#chart').html('');
-                $('p').html('Fetching data');
+                $('.message').html('Fetching data');
                 //DrawGraph(jsonData);
                 //DrawGraph(csvData);
                 $.ajax({
                     url: "http://localhost:5000/Sample/GetCSVData"
                     , type: "GET"
                     , success: function (response) {
-                        $('p').html('');
+                        $('.message').html('');
                         if (!typeof response !== "object") {
                             response = JSON.parse(response);
                         }
                         DrawGraph(response);
                     }
                     , error: function (xhr) {
-                        $('p').html(xhr.responseText);
+                        $('.message').html("There was an error while fetching the data, please try again");
                     }
                 });
 

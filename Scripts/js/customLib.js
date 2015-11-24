@@ -33,11 +33,11 @@ function GetStorage(d) {
     });
 }
 function DrawGraph(response) {
-    var margin = { top: 50, right: 0, bottom: 100, left: 200 },
+    var margin = { top: 50, right: 20, bottom: 100, left: 150 },
         width = 960 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom,
         gridSize = 20,
-        legendElementWidth = 5,
+        legendElementWidth = gridSize/5,
         buckets = 236,
         colors = ["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58"], // alternatively colorbrewer.YlGnBu[9]
         categories = GetCategories(response),
@@ -64,7 +64,7 @@ function DrawGraph(response) {
           .attr("y", function (d, i) { return i * gridSize; })
           .style("text-anchor", "end")
           .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
-           .attr('font-size', ".9em")
+           .attr('font-size', (gridSize / 22) + "em")
           .attr("class", function (d, i) {
               //return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis");
               return "catLabel";
@@ -78,7 +78,7 @@ function DrawGraph(response) {
           .attr("y", 0)
           //.style("text-anchor", "middle")
           .attr("transform", "translate(" + gridSize / 1.5 + ", -6)")
-            .attr('font-size', ".9em")
+            .attr('font-size', (gridSize/22)+"em")
           .attr("class", function (d, i) {
               return "storeLabel";
           });
@@ -193,9 +193,9 @@ function DrawGraph(response) {
         start.append("text")
              .text(Math.round(avgDataArr[0]*100)/100)
              .attr("font-family", "sans-serif")
-             .attr("font-size", "12px")
+             .attr("font-size", (gridSize/22)+"em")
              .style("fill", "black")
-             .attr('x', +rect.attr("x") - legendElementWidth*10)
+             .attr('x', +rect.attr("x") - legendElementWidth*10-15)
              .attr("y", parseInt(rect.attr("y"),10) + legendElementWidth * 3)
              
         ;
@@ -204,7 +204,7 @@ function DrawGraph(response) {
         end.append("text")
              .text(Math.round(avgDataArr[avgDataArr.length-1] * 100) / 100)
              .attr("font-family", "sans-serif")
-             .attr("font-size", "12px")
+             .attr("font-size", (gridSize / 22) + "em")
              .style("fill", "black")
              .attr('x', +rect.attr("x") + legendElementWidth * 5)
              .attr("y", +rect.attr("y") + legendElementWidth * 3)
