@@ -27,21 +27,21 @@
                 $('#chart').html('');
                 $('p').html('Fetching data');
                 //DrawGraph(jsonData);
-                DrawGraph(csvData);
-                //$.ajax({
-                //    url: "http://localhost:5000/Sample/GetCSVData"
-                //    , type: "GET"
-                //    , success: function (response) {
-                //        $('p').html('');
-                //        if (!typeof response !== "object") {
-                //            response = JSON.parse(response);
-                //        }
-                //        DrawGraph(response);
-                //    }
-                //    , error: function (xhr) {
-                //        $('p').html(xhr.responseText);
-                //    }
-                //});
+                //DrawGraph(csvData);
+                $.ajax({
+                    url: "http://localhost:5000/Sample/GetCSVData"
+                    , type: "GET"
+                    , success: function (response) {
+                        $('p').html('');
+                        if (!typeof response !== "object") {
+                            response = JSON.parse(response);
+                        }
+                        DrawGraph(response);
+                    }
+                    , error: function (xhr) {
+                        $('p').html(xhr.responseText);
+                    }
+                });
 
                 
                 
